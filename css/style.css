@@ -5,7 +5,6 @@
 }
 
 *, *:before, *:after {
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -69,6 +68,42 @@ h1, h2, h3, h4, h5, h6 {
   font-size: inheri;
 }
 
-body {
-  width: 500px;
+@font-face {
+  font-family: "Montserrat";
+  src: url("Montserrat-Black.eot");
+  src: local("Montserrat Black"), local("Montserrat-Black"), url("Montserrat-Black.eot?#iefix") format("embedded-opentype"), url("Montserrat-Black.woff2") format("woff2"), url("Montserrat-Black.woff") format("woff"), url("Montserrat-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("Montserrat-Regular.eot");
+  src: local("Montserrat Regular"), local("Montserrat-Regular"), url("Montserrat-Regular.eot?#iefix") format("embedded-opentype"), url("Montserrat-Regular.woff2") format("woff2"), url("Montserrat-Regular.woff") format("woff"), url("Montserrat-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("Montserrat-Bold.eot");
+  src: local("Montserrat Bold"), local("Montserrat-Bold"), url("Montserrat-Bold.eot?#iefix") format("embedded-opentype"), url("Montserrat-Bold.woff2") format("woff2"), url("Montserrat-Bold.woff") format("woff"), url("Montserrat-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("Montserrat-LightItalic.eot");
+  src: local("Montserrat Light Italic"), local("Montserrat-LightItalic"), url("Montserrat-LightItalic.eot?#iefix") format("embedded-opentype"), url("Montserrat-LightItalic.woff2") format("woff2"), url("Montserrat-LightItalic.woff") format("woff"), url("Montserrat-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("Montserrat-SemiBold.eot");
+  src: local("Montserrat SemiBold"), local("Montserrat-SemiBold"), url("Montserrat-SemiBold.eot?#iefix") format("embedded-opentype"), url("Montserrat-SemiBold.woff2") format("woff2"), url("Montserrat-SemiBold.woff") format("woff"), url("Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
 }
