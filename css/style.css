@@ -69,45 +69,154 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @font-face {
-  font-family: "Montserrat";
-  src: url("Montserrat-Black.eot");
-  src: local("Montserrat Black"), local("Montserrat-Black"), url("Montserrat-Black.eot?#iefix") format("embedded-opentype"), url("Montserrat-Black.woff2") format("woff2"), url("Montserrat-Black.woff") format("woff"), url("Montserrat-Black.ttf") format("truetype");
+  font-family: "../fonts/Montserrat";
+  src: url("../fonts/Montserrat-Black.eot");
+  src: local("../fonts/Montserrat Black"), local("../fonts/Montserrat-Black"), url("../fonts/Montserrat-Black.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Black.woff2") format("woff2"), url("../fonts/Montserrat-Black.woff") format("woff"), url("../fonts/Montserrat-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Nunito Sans";
-  src: url("NunitoSans-SemiBold.eot");
-  src: local("Nunito Sans SemiBold"), local("NunitoSans-SemiBold"), url("NunitoSans-SemiBold.eot?#iefix") format("embedded-opentype"), url("NunitoSans-SemiBold.woff2") format("woff2"), url("NunitoSans-SemiBold.woff") format("woff"), url("NunitoSans-SemiBold.ttf") format("truetype");
+  src: url("../fonts/NunitoSans-SemiBold.eot");
+  src: local("Nunito Sans SemiBold"), local("../fonts/NunitoSans-SemiBold"), url("../fonts/NunitoSans-SemiBold.eot?#iefix") format("embedded-opentype"), url("../fonts/NunitoSans-SemiBold.woff2") format("woff2"), url("../fonts/NunitoSans-SemiBold.woff") format("woff"), url("../fonts/NunitoSans-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Nunito Sans";
-  src: url("NunitoSans-Bold.eot");
-  src: local("Nunito Sans Bold"), local("NunitoSans-Bold"), url("NunitoSans-Bold.eot?#iefix") format("embedded-opentype"), url("NunitoSans-Bold.woff2") format("woff2"), url("NunitoSans-Bold.woff") format("woff"), url("NunitoSans-Bold.ttf") format("truetype");
+  src: url("../fonts/NunitoSans-Bold.eot");
+  src: local("Nunito Sans Bold"), local("../fonts/NunitoSans-Bold"), url("../fonts/NunitoSans-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/NunitoSans-Bold.woff2") format("woff2"), url("../fonts/NunitoSans-Bold.woff") format("woff"), url("../fonts/NunitoSans-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Nunito Sans";
-  src: url("NunitoSans-LightItalic.eot");
-  src: local("Nunito Sans Light Italic"), local("NunitoSans-LightItalic"), url("NunitoSans-LightItalic.eot?#iefix") format("embedded-opentype"), url("NunitoSans-LightItalic.woff2") format("woff2"), url("NunitoSans-LightItalic.woff") format("woff"), url("NunitoSans-LightItalic.ttf") format("truetype");
+  src: url("../fonts/NunitoSans-LightItalic.eot");
+  src: local("Nunito Sans Light Italic"), local("../fonts/NunitoSans-LightItalic"), url("../fonts/NunitoSans-LightItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/NunitoSans-LightItalic.woff2") format("woff2"), url("../fonts/NunitoSans-LightItalic.woff") format("woff"), url("../fonts/NunitoSans-LightItalic.ttf") format("truetype");
   font-weight: 300;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Nunito Sans";
-  src: url("NunitoSans-Regular.eot");
-  src: local("Nunito Sans Regular"), local("NunitoSans-Regular"), url("NunitoSans-Regular.eot?#iefix") format("embedded-opentype"), url("NunitoSans-Regular.woff2") format("woff2"), url("NunitoSans-Regular.woff") format("woff"), url("NunitoSans-Regular.ttf") format("truetype");
+  src: url("../fonts/NunitoSans-Regular.eot");
+  src: local("Nunito Sans Regular"), local("../fonts/NunitoSans-Regular"), url("../fonts/NunitoSans-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/NunitoSans-Regular.woff2") format("woff2"), url("../fonts/NunitoSans-Regular.woff") format("woff"), url("../fonts/NunitoSans-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 body {
   font-family: "Nunito Sans";
+  font-weight: bold;
+}
+
+main {
+  flex: 1 1 100%;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.header__whitebg {
+  flex: 0 0 27.57%;
+}
+
+.header__bg {
+  flex: 0 0 49.28%;
+}
+
+.header__bg img {
+  object-fit: cover;
+}
+
+.header__menu {
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 60px;
+  height: 100%;
+  flex: 0 0 23.15%;
+  background-color: #415167;
+}
+
+.header__menu li {
+  margin: 30px 0 0 0;
+}
+
+.header__menu li a {
+  color: #edf0f5;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.header__menu li a:hover {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.header__cart {
+  position: relative;
+  top: -300px;
+  left: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.header__title {
+  position: absolute;
+  top: 504px;
+  left: 9.28%;
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 54px;
+  line-height: 70px;
+  color: #415167;
+}
+
+.header__title span {
+  padding: 0 15px;
+}
+
+.header__title span:nth-child(2) {
+  color: #edf0f5;
+  background-color: #c7a17a;
+}
+
+.logo {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 74.29%;
+  left: 9.28%;
+  top: 72px;
+}
+
+.logo__number-goots {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #c7a17a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -10px;
+  right: -10px;
 }
