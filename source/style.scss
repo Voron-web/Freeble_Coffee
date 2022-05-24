@@ -1,4 +1,5 @@
 @import "res.scss";
+
 @font-face {
    font-family: "../fonts/Montserrat";
    src: url("../fonts/Montserrat-Black.eot");
@@ -60,6 +61,7 @@ $light_gray: #edf0f5;
 body {
    font-family: "Nunito Sans";
    font-weight: bold;
+   // min-height: 100%;
 }
 
 main {
@@ -68,40 +70,88 @@ main {
 }
 
 ///////////////////////////////////////////////
+h1 {
+   font-family: "Montserrat";
+   font-style: normal;
+   font-weight: 900;
+   font-size: 54px;
+   line-height: 70px;
+   color: $primary_color;
+}
+h2 {
+   font-family: "Montserrat";
+   font-weight: 900;
+   font-size: 30px;
+   line-height: 34px;
+   color: #415167;
+}
+h3 {
+   font-family: "Nunito";
+   font-style: normal;
+   font-weight: 600;
+   font-size: 20px;
+   line-height: 24px;
+   color: #415167;
+}
+
+h4 {
+   font-family: "Nunito";
+   font-style: normal;
+   font-weight: 700;
+   font-size: 24px;
+   line-height: 28px;
+   color: #232c38;
+}
 
 .wrapper {
-   height: 100%;
+   min-height: 100%;
    display: flex;
    flex-direction: column;
    max-width: 1400px;
+   // width: 100%;
    margin: 0 auto;
+   background: #f2f2f2;
 }
 
 .header {
-   // width: 100%;
+   width: 100%;
+   min-height: 768px;
    display: flex;
    position: relative;
-   align-items: center;
+   top: 0;
+   left: 0;
+   align-items: stretch;
    &__whitebg {
-      flex: 0 0 27.57%;
+      flex: 0 1 27.57%;
    }
 
    &__bg {
       flex: 0 0 49.28%;
+      // justify-self: stretch;
+      overflow: hidden;
       & img {
          // width: 100%;
-         object-fit: cover;
+         height: auto;
+         object-fit: contain;
       }
    }
 
    &__menu {
+      position: relative;
+      margin: 0;
+      padding: 0;
       // position: relative;
       display: flex;
       align-items: center;
-      padding: 0 0 0 60px;
-      height: 100%;
-      flex: 0 0 23.15%;
+      // padding: 0 0 0 60px;
+      // height: 100%;
+      flex: 0 1 23.15%;
+      // flex: 0 0 auto;
+      width: 100%;
       background-color: $primary_color;
+      & ul {
+         margin: 60px;
+      }
       & li {
          margin: 30px 0 0 0;
          & a {
@@ -118,9 +168,10 @@ main {
       }
    }
    &__cart {
-      position: relative;
-      top: -300px;
-      left: 24px;
+      position: absolute;
+      top: 72px;
+      // left: 24px;
+      left: 60px;
       width: 24px;
       height: 24px;
    }
@@ -131,16 +182,16 @@ main {
       left: 9.28%;
       display: flex;
       flex-direction: column;
-      font-family: "Montserrat";
-      font-style: normal;
-      font-weight: 900;
-      font-size: 54px;
-      line-height: 70px;
-      color: $primary_color;
+      // font-family: "Montserrat";
+      // font-style: normal;
+      // font-weight: 900;
+      // font-size: 54px;
+      // line-height: 70px;
+      // color: $primary_color;
       & span {
          padding: 0 15px;
       }
-      & span:nth-child(2) {
+      & h1:nth-child(2) span {
          color: $light_gray;
          background-color: $accent_color;
       }
@@ -148,9 +199,9 @@ main {
 }
 .logo {
    position: absolute;
-   display: flex;
-   justify-content: space-between;
-   width: 74.29%;
+   // display: flex;
+   // justify-content: space-between;
+   // width: 74.29%;
    left: 9.28%;
    top: 72px;
    &__img {
@@ -168,4 +219,223 @@ main {
       top: -10px;
       right: -10px;
    }
+}
+
+///////////////////////////////////////////////
+
+.features {
+   margin: 87px 148px 0;
+   &__subtitle {
+      text-align: center;
+   }
+
+   &__title {
+      margin: 9px 0 0 0;
+      text-align: center;
+   }
+
+   &__block {
+      margin: 72px 0 0 0;
+      display: flex;
+      justify-content: space-between;
+   }
+}
+.cart {
+   flex: 0 0 20.47%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   &__pictures {
+      width: 80px;
+      height: 80px;
+      & img {
+         object-fit: cover;
+      }
+   }
+
+   &__title {
+      margin: 42px 0 0 0;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 28px;
+      color: #232c38;
+   }
+
+   &__text {
+      margin: 12px 0 0 0;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 22px;
+      text-align: center;
+      color: $dark_gray;
+   }
+}
+
+///////////////////////////////////////////////
+
+.favorite {
+   position: relative;
+   margin: 128px 0 0 0;
+   height: 894px;
+   &__subtitle {
+      margin: 90px 0 0 0;
+      text-align: center;
+   }
+
+   &__title {
+      margin: 6px 0 0 0;
+      text-align: center;
+   }
+
+   &__bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 27.43%;
+      height: 100%;
+      background-color: $primary_color;
+   }
+
+   &__slider-wrapper {
+      padding: 50px 0;
+      width: 100%;
+      overflow: hidden;
+      // overflow-y: visible;
+      margin: 72px 0 0 0;
+   }
+
+   &__right-button,
+   &__left-button {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background-color: $accent_color;
+      border-radius: 50%;
+      &::before {
+         content: "";
+         width: 24px;
+         height: 3px;
+         background-color: #fff;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         // z-index: 10;
+      }
+   }
+   &__right-button {
+      top: 58.5%;
+      right: 80px;
+      z-index: 10;
+      &:after {
+         content: "";
+         height: 15px;
+         width: 15px;
+         position: absolute;
+         border-top: 3px solid #fff;
+         border-right: 3px solid #fff;
+         transform: rotate(45deg) translate(-70%, 0);
+         top: 50%;
+         right: 3px;
+      }
+   }
+   &__left-button {
+      // position: absolute;
+      z-index: 10;
+      top: 58.5%;
+      left: 80px;
+      &:after {
+         content: "";
+         height: 15px;
+         width: 15px;
+         position: absolute;
+         border-top: 3px solid #fff;
+         border-right: 3px solid #fff;
+         transform: rotate(225deg) translate(0, 68%);
+         top: 50%;
+         left: 3px;
+      }
+   }
+
+   &__cart {
+      width: 559px;
+      display: flex;
+      filter: drop-shadow(0px 4px 24px rgba(205, 205, 205, 0.5));
+   }
+   &__cart-img {
+      // object-fit: contain;
+      background-color: #979797;
+      & img {
+         object-fit: contain;
+      }
+   }
+
+   &__cart-info {
+      background-color: #fff;
+      // display: block;
+      width: 100%;
+      padding: 42px;
+   }
+
+   &__cart-price {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: #c7a17a;
+   }
+
+   &__cart-title {
+      margin: 8px 0 0 0;
+   }
+
+   &__cart-text {
+      margin: 24px 0 0 0;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 22px;
+      color: #151d28;
+   }
+
+   &__cart-buttons {
+      margin: 18px 0 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      & button {
+         width: 134px;
+         height: 32px;
+         background-color: $accent_color;
+         border-radius: 16px;
+
+         font-weight: 700;
+         font-size: 16px;
+         line-height: 22px;
+         // text-align: center;
+         color: #f9fbff;
+      }
+      & a {
+         font-weight: 700;
+         font-size: 16px;
+         color: #415167;
+      }
+   }
+
+   &__slider-line {
+      position: relative;
+      height: 544px;
+      display: grid;
+      grid-template-rows: 256px 256px;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 32px;
+      column-gap: 30px;
+      left: 130px;
+      z-index: 2;
+   }
+}
+
+///////////////////////////////////////////////
+
+* {
+   // border: 1px solid red;
 }
