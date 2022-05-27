@@ -301,7 +301,6 @@ h4 {
       padding: 50px 0;
       width: 100%;
       overflow: hidden;
-      // overflow-y: visible;
       margin: 72px 0 0 0;
    }
 
@@ -312,6 +311,9 @@ h4 {
       height: 48px;
       background-color: $accent_color;
       border-radius: 50%;
+      opacity: 0.3;
+      transition: 0.5s;
+
       &::before {
          content: "";
          width: 24px;
@@ -321,9 +323,12 @@ h4 {
          top: 50%;
          left: 50%;
          transform: translate(-50%, -50%);
-         // z-index: 10;
+      }
+      &:hover {
+         opacity: 1;
       }
    }
+
    &__right-button {
       top: 58.5%;
       right: 80px;
@@ -337,7 +342,7 @@ h4 {
          border-right: 3px solid #fff;
          transform: rotate(45deg) translate(-70%, 0);
          top: 50%;
-         right: 3px;
+         right: 6px;
       }
    }
    &__left-button {
@@ -354,7 +359,7 @@ h4 {
          border-right: 3px solid #fff;
          transform: rotate(225deg) translate(0, 68%);
          top: 50%;
-         left: 3px;
+         left: 6px;
       }
    }
 
@@ -370,25 +375,21 @@ h4 {
          object-fit: contain;
       }
    }
-
    &__cart-info {
       background-color: #fff;
       // display: block;
       width: 100%;
       padding: 42px;
    }
-
    &__cart-price {
       font-weight: 600;
       font-size: 20px;
       line-height: 24px;
       color: #c7a17a;
    }
-
    &__cart-title {
       margin: 8px 0 0 0;
    }
-
    &__cart-text {
       margin: 24px 0 0 0;
       font-weight: 300;
@@ -396,7 +397,6 @@ h4 {
       line-height: 22px;
       color: #151d28;
    }
-
    &__cart-buttons {
       margin: 18px 0 0 0;
       display: flex;
@@ -407,11 +407,9 @@ h4 {
          height: 32px;
          background-color: $accent_color;
          border-radius: 16px;
-
          font-weight: 700;
          font-size: 16px;
          line-height: 22px;
-         // text-align: center;
          color: #f9fbff;
       }
       & a {
@@ -420,7 +418,6 @@ h4 {
          color: #415167;
       }
    }
-
    &__slider-line {
       position: relative;
       height: 544px;
@@ -431,6 +428,19 @@ h4 {
       column-gap: 30px;
       left: 130px;
       z-index: 2;
+      --slow: 0.7s;
+      transition: var(--slow);
+      --positionX: 0px;
+      transform: translateX(var(--positionX));
+      // transition: 0.25s;
+      -webkit-user-select: none;
+      /* user-select -- это нестандартное свойство */
+
+      -moz-user-select: none;
+      /* поэтому нужны префиксы */
+
+      -ms-user-select: none;
+      touch-action: none;
    }
 }
 

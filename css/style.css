@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   padding: 0;
   margin: 0;
@@ -351,6 +352,8 @@ h4 {
   height: 48px;
   background-color: #c7a17a;
   border-radius: 50%;
+  opacity: 0.3;
+  transition: 0.5s;
 }
 
 .favorite__right-button::before, .favorite__left-button::before {
@@ -362,6 +365,10 @@ h4 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.favorite__right-button:hover, .favorite__left-button:hover {
+  opacity: 1;
 }
 
 .favorite__right-button {
@@ -379,7 +386,7 @@ h4 {
   border-right: 3px solid #fff;
   transform: rotate(45deg) translate(-70%, 0);
   top: 50%;
-  right: 3px;
+  right: 6px;
 }
 
 .favorite__left-button {
@@ -397,7 +404,7 @@ h4 {
   border-right: 3px solid #fff;
   transform: rotate(225deg) translate(0, 68%);
   top: 50%;
-  left: 3px;
+  left: 6px;
 }
 
 .favorite__cart {
@@ -473,4 +480,14 @@ h4 {
   column-gap: 30px;
   left: 130px;
   z-index: 2;
+  --slow: 0.7s;
+  transition: var(--slow);
+  --positionX: 0px;
+  transform: translateX(var(--positionX));
+  -webkit-user-select: none;
+  /* user-select -- это нестандартное свойство */
+  -moz-user-select: none;
+  /* поэтому нужны префиксы */
+  -ms-user-select: none;
+  touch-action: none;
 }
