@@ -109,6 +109,10 @@ h1, h2, h3, h4, h5, h6 {
   font-style: normal;
 }
 
+.hidden {
+  display: none;
+}
+
 body {
   font-family: "Nunito Sans";
   font-weight: bold;
@@ -407,6 +411,10 @@ h4 {
   left: 6px;
 }
 
+.favorite__left-button .hidden {
+  display: none;
+}
+
 .favorite__cart {
   width: 559px;
   display: flex;
@@ -471,11 +479,14 @@ h4 {
 }
 
 .favorite__slider-line {
+  width: fit-content;
   position: relative;
   height: 544px;
   display: grid;
   grid-template-rows: 256px 256px;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
   row-gap: 32px;
   column-gap: 30px;
   left: 130px;

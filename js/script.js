@@ -2,14 +2,13 @@ const favoriteLine = document.querySelector(".favorite__slider-line");
 const favoriteCards = document.getElementsByClassName("favorite__cart");
 const favoriteRightButton = document.querySelector(".favorite__right-button");
 const favoriteLeftButton = document.querySelector(".favorite__left-button");
-// const favoriteLineStartPosition = parseInt(getComputedStyle(favoriteLine).left);
-// const favoriteLineStartPosition = getComputedStyle(favoriteLine).transform;
 
 let favoritePage = 0;
 let favoriteMaxPage = favoriteCards.length / 2 - 1;
 let favoritePagelenght = document.querySelector(".favorite__cart").clientWidth + parseInt(getComputedStyle(favoriteLine).columnGap);
 let cursorPositionStart;
 let favoriteMoveble = false;
+let favorineLinePosition = 0;
 
 favoriteLine.ondragstart = function () {
    return false;
@@ -21,56 +20,82 @@ favoriteLine.onpointermove = function () {
 let moveSliderLine = function (slider, page, lenght) {
    const style = window.getComputedStyle(slider);
    const posX = parseInt(style.getPropertyValue("--positionX"));
-   console.log(posX);
    let moveX = -page * lenght;
-   console.log(moveX);
-   slider.style.setProperty("--positionX", `${moveX}px`)
+   favorineLinePosition = moveX;
+   slider.style.setProperty("--positionX", `${moveX}px`);
 }
 
-favoriteRightButton.addEventListener('click', () => {
+let checkButtons = function (leftButton, rightButton, page, maxPage) {
+   if (page == 0) {
+      leftButton.classList.add("hidden")
+      rightButton.classList.remove("hidden")
+   }
+   else if (page == maxPage) {
+      rightButton.classList.add("hidden")
+      leftButton.classList.remove("hidden")
+   }
+   else {
+      rightButton.classList.remove("hidden")
+      leftButton.classList.remove("hidden")
+   }
+}
+
+checkButtons(favoriteLeftButton, favoriteRightButton, favoritePage, favoriteMaxPage);
+
+favoriteRightButton.addEventListener('click', (event) => {
    if (favoritePage < favoriteMaxPage) {
-      favoritePage += 1;
+      favoritePage++;
       moveSliderLine(favoriteLine, favoritePage, favoritePagelenght);
-   }
-})
-favoriteLeftButton.addEventListener('click', () => {
-   if (favoritePage > 0) {
-      favoritePage -= 1;
-      moveSliderLine(favoriteLine, favoritePage, favoritePagelenght);
-   }
+   };
+   checkButtons(favoriteLeftButton, favoriteRightButton, favoritePage, favoriteMaxPage);
 })
 
+favoriteLeftButton.addEventListener('click', () => {
+   if (favoritePage > 0) {
+      favoritePage--;
+      moveSliderLine(favoriteLine, favoritePage, favoritePagelenght);
+      favoriteRightButton.classList.remove("hidden")
+   }
+   checkButtons(favoriteLeftButton, favoriteRightButton, favoritePage, favoriteMaxPage);
+
+})
 favoriteLine.addEventListener("pointerdown", (event) => {
    favoriteMoveble = true;
    const style = window.getComputedStyle(favoriteLine);
    const posX = parseInt(style.getPropertyValue("--positionX"));
    cursorPositionStart = event.pageX - posX;
    favoriteLine.style.setProperty("--slow", "0s");
-
-   // console.log("start" + cursorPositionStart);
 })
 
-favoriteLine.addEventListener("pointerup", (event) => {
+document.addEventListener("pointerup", (event) => {
+   console.log(event.target);
    favoriteMoveble = false;
-   favoriteLine.style.setProperty("--slow", "0.7s");
+   if ((event.target !== favoriteRightButton) & (event.target !== favoriteLeftButton)) {
+      favoriteLine.style.setProperty("--slow", "0.7s");
+      favoritePage = Math.round(-favorineLinePosition / favoritePagelenght);
+      moveSliderLine(favoriteLine, favoritePage, favoritePagelenght)
+   }
+   checkButtons(favoriteLeftButton, favoriteRightButton, favoritePage, favoriteMaxPage);
+
 })
 
 favoriteLine.addEventListener("pointermove", (event) => {
-   // let cursorPosition = event.pageX;
-
    if (!favoriteMoveble) {
       return;
    }
-   let favorineLinePosition = event.pageX - cursorPositionStart;
-   console.log(favorineLinePosition);
+   favorineLinePosition = event.pageX - cursorPositionStart;
    if (favorineLinePosition > 100) {
       favoriteLine.style.setProperty("--slow", "0.7s");
       favoriteLine.style.setProperty("--positionX", `0px`)
+      favorineLinePosition = 0;
+      favoriteMoveble = false;
       return;
    }
    else if (favorineLinePosition < -favoriteMaxPage * favoritePagelenght - 100) {
       favoriteLine.style.setProperty("--slow", "0.7s");
       favoriteLine.style.setProperty("--positionX", `${- favoriteMaxPage * favoritePagelenght}px`)
+      favorineLinePosition = -favoriteMaxPage * favoritePagelenght;
+      favoriteMoveble = false;
       return;
    }
    else {
