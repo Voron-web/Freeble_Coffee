@@ -1,3 +1,4 @@
+
 const favoriteLine = document.querySelector(".favorite__slider-line");
 const favoriteCards = document.getElementsByClassName("favorite__cart");
 const favoriteRightButton = document.querySelector(".favorite__right-button");

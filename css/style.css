@@ -1,4 +1,3 @@
-@charset "UTF-8";
 * {
   padding: 0;
   margin: 0;
@@ -70,7 +69,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @font-face {
-  font-family: "../fonts/Montserrat";
+  font-family: "Montserrat";
   src: url("../fonts/Montserrat-Black.eot");
   src: local("../fonts/Montserrat Black"), local("../fonts/Montserrat-Black"), url("../fonts/Montserrat-Black.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Black.woff2") format("woff2"), url("../fonts/Montserrat-Black.woff") format("woff"), url("../fonts/Montserrat-Black.ttf") format("truetype");
   font-weight: 900;
@@ -120,6 +119,43 @@ body {
 
 main {
   flex: 1 1 100%;
+}
+
+.cart__price {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #c7a17a;
+}
+
+.cart__text {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 22px;
+  color: #151d28;
+}
+
+.cart__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart__buttons button {
+  width: 134px;
+  height: 32px;
+  background-color: #c7a17a;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #f9fbff;
+}
+
+.cart__buttons a {
+  font-weight: 700;
+  font-size: 16px;
+  color: #415167;
 }
 
 h1 {
@@ -435,47 +471,16 @@ h4 {
   padding: 42px;
 }
 
-.favorite__cart-price {
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  color: #c7a17a;
-}
-
 .favorite__cart-title {
   margin: 8px 0 0 0;
 }
 
 .favorite__cart-text {
   margin: 24px 0 0 0;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 22px;
-  color: #151d28;
 }
 
 .favorite__cart-buttons {
   margin: 18px 0 0 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.favorite__cart-buttons button {
-  width: 134px;
-  height: 32px;
-  background-color: #c7a17a;
-  border-radius: 16px;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
-  color: #f9fbff;
-}
-
-.favorite__cart-buttons a {
-  font-weight: 700;
-  font-size: 16px;
-  color: #415167;
 }
 
 .favorite__slider-line {
@@ -496,9 +501,132 @@ h4 {
   --positionX: 0px;
   transform: translateX(var(--positionX));
   -webkit-user-select: none;
-  /* user-select -- это нестандартное свойство */
   -moz-user-select: none;
-  /* поэтому нужны префиксы */
   -ms-user-select: none;
   touch-action: none;
+}
+
+.giftset {
+  z-index: 1;
+  position: relative;
+  padding: 88px 0 125px 0;
+}
+
+.giftset__subtitle {
+  text-align: center;
+}
+
+.giftset__title {
+  margin: 6px 0 0 0;
+  text-align: center;
+}
+
+.giftset__bg {
+  background-color: #edf0f5;
+  height: 100%;
+  width: 72.57%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.giftset__content {
+  margin: 66px 134px 0 130px;
+  display: flex;
+}
+
+.giftset__cart-bg {
+  box-shadow: 1px 0px 10px rgba(205, 205, 205, 0.5);
+  background-color: #fff;
+  width: 75.62%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.giftset__cart-img {
+  flex: 0 0 47%;
+  object-fit: contain;
+}
+
+.giftset__carts {
+  display: flex;
+  position: relative;
+}
+
+.giftset__cart-content {
+  padding: 64px;
+}
+
+.giftset__cart-title {
+  margin: 12px 0 0 0;
+}
+
+.giftset__cart-text {
+  margin: 12px 0 0 0;
+  text-align: left;
+}
+
+.giftset__cart-property {
+  display: flex;
+  justify-content: space-between;
+}
+
+.giftset__cart-button-block {
+  margin: 46px 0 0 0;
+}
+
+.giftset__cart-button-block a {
+  margin: 0 62px;
+}
+
+.giftset__button-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-self: stretch;
+}
+
+.giftset__button {
+  background-color: #edf0f5;
+  width: 88px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat";
+  font-weight: 900;
+  font-style: normal;
+  font-size: 30px;
+  color: #415167;
+}
+
+.giftset__button.active {
+  opacity: 1;
+  background-color: #fff;
+  box-shadow: 1px 0px 10px rgba(205, 205, 205, 0.5);
+}
+
+.property__block {
+  margin: 24px 0 0 0;
+  display: flex;
+}
+
+.property__img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.property__text {
+  font-weight: 600;
+  font-size: 16px;
+  color: #415167;
+}
+
+.property__text p:first-child {
+  font-weight: 300;
 }
