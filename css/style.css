@@ -357,10 +357,10 @@ h4 {
   position: relative;
   margin: 128px 0 0 0;
   height: 894px;
+  padding: 90px 0 0 0;
 }
 
 .favorite__subtitle {
-  margin: 90px 0 0 0;
   text-align: center;
 }
 
@@ -534,6 +534,7 @@ h4 {
 .giftset__content {
   margin: 66px 134px 0 130px;
   display: flex;
+  height: 463px;
 }
 
 .giftset__cart-bg {
@@ -553,8 +554,21 @@ h4 {
 }
 
 .giftset__carts {
-  display: flex;
+  width: 100%;
   position: relative;
+}
+
+.giftset__cart {
+  display: flex;
+  position: absolute;
+  z-index: -1;
+  transition: opacity 1s;
+  opacity: 0;
+}
+
+.giftset__cart.active {
+  opacity: 1;
+  z-index: 0;
 }
 
 .giftset__cart-content {
@@ -602,6 +616,7 @@ h4 {
   font-style: normal;
   font-size: 30px;
   color: #415167;
+  transition: 1s;
 }
 
 .giftset__button.active {

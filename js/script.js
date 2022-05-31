@@ -11,6 +11,8 @@ let cursorPositionStart;
 let favoriteMoveble = false;
 let favorineLinePosition = 0;
 
+// Slider
+
 favoriteLine.ondragstart = function () {
    return false;
 };
@@ -102,4 +104,29 @@ favoriteLine.addEventListener("pointermove", (event) => {
    else {
       favoriteLine.style.setProperty("--positionX", `${favorineLinePosition}px`)
    }
+})
+
+
+
+
+//Buttons
+
+const giftsetButtons = document.querySelectorAll(".giftset__button");
+const giftsetCarts = document.querySelectorAll(".giftset__cart");
+
+let giftsetCartChange = function (number) {
+   giftsetButtons.forEach((element) => {
+      element.classList.remove("active")
+   });
+   giftsetButtons[number].classList.add("active")
+   giftsetCarts.forEach((element) => {
+      element.classList.remove("active")
+   });
+   giftsetCarts[number].classList.add("active")
+};
+
+giftsetButtons.forEach((item, index) => {
+   item.addEventListener("click", () =>
+      giftsetCartChange(index))
+
 })
