@@ -1,4 +1,4 @@
-
+// Slider
 const favoriteLine = document.querySelector(".favorite__slider-line");
 const favoriteCards = document.getElementsByClassName("favorite__cart");
 const favoriteRightButton = document.querySelector(".favorite__right-button");
@@ -11,8 +11,6 @@ let cursorPositionStart;
 let favoriteMoveble = false;
 let favorineLinePosition = 0;
 
-// Slider
-
 favoriteLine.ondragstart = function () {
    return false;
 };
@@ -20,10 +18,10 @@ favoriteLine.onpointermove = function () {
    return false;
 };
 
-let moveSliderLine = function (slider, page, lenght) {
+let moveSliderLine = function (slider, page, cartLenght) {
    const style = window.getComputedStyle(slider);
    const posX = parseInt(style.getPropertyValue("--positionX"));
-   let moveX = -page * lenght;
+   let moveX = -page * cartLenght;
    favorineLinePosition = moveX;
    slider.style.setProperty("--positionX", `${moveX}px`);
 }
@@ -71,7 +69,7 @@ favoriteLine.addEventListener("pointerdown", (event) => {
 })
 
 document.addEventListener("pointerup", (event) => {
-   console.log(event.target);
+   // console.log(event.target);
    favoriteMoveble = false;
    if ((event.target !== favoriteRightButton) & (event.target !== favoriteLeftButton)) {
       favoriteLine.style.setProperty("--slow", "0.7s");
@@ -129,4 +127,36 @@ giftsetButtons.forEach((item, index) => {
    item.addEventListener("click", () =>
       giftsetCartChange(index))
 
+})
+
+//slider combo
+
+const comboLine = document.querySelector('.combo__cart-line');
+const comboCarts = document.getElementsByClassName('combo__cart');
+const comboRightButton = document.querySelector('.combo__button-right');
+const comboLeftButton = document.querySelector('.combo__button-left');
+
+let comboPage = 0;
+let comboMaxPage = comboCarts.length - 1;
+let comboPageLenght = comboCarts[0].clientWidth + parseInt(getComputedStyle(comboLine).gap);
+
+
+checkButtons(comboLeftButton, comboRightButton, comboPage, comboMaxPage);
+
+// console.log(comboPageLenght);
+
+comboRightButton.addEventListener('click', () => {
+   if (comboPage < comboMaxPage) {
+      comboPage++;
+      moveSliderLine(comboLine, comboPage, comboPageLenght);
+   }
+   checkButtons(comboLeftButton, comboRightButton, comboPage, comboMaxPage);
+})
+
+comboLeftButton.addEventListener('click', () => {
+   if (comboPage > 0) {
+      comboPage--;
+      moveSliderLine(comboLine, comboPage, comboPageLenght);
+   }
+   checkButtons(comboLeftButton, comboRightButton, comboPage, comboMaxPage);
 })

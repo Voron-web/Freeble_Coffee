@@ -115,6 +115,7 @@ h1, h2, h3, h4, h5, h6 {
 body {
   font-family: "Nunito Sans";
   font-weight: bold;
+  background: #f2f2f2;
 }
 
 main {
@@ -156,6 +157,55 @@ main {
   font-weight: 700;
   font-size: 16px;
   color: #415167;
+}
+
+.slider__button-right, .slider__button-left {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background-color: #c7a17a;
+  border-radius: 50%;
+  opacity: 0.3;
+  transition: 0.5s;
+}
+
+.slider__button-right::before, .slider__button-left::before {
+  content: "";
+  width: 24px;
+  height: 3px;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.slider__button-right:hover, .slider__button-left:hover {
+  opacity: 1;
+}
+
+.slider__button-right:after {
+  content: "";
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+  transform: rotate(45deg) translate(-70%, 0);
+  top: 50%;
+  right: 6px;
+}
+
+.slider__button-left:after {
+  content: "";
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+  transform: rotate(225deg) translate(0, 68%);
+  top: 50%;
+  left: 6px;
 }
 
 h1 {
@@ -386,69 +436,16 @@ h4 {
   margin: 72px 0 0 0;
 }
 
-.favorite__right-button, .favorite__left-button {
-  position: absolute;
-  width: 48px;
-  height: 48px;
-  background-color: #c7a17a;
-  border-radius: 50%;
-  opacity: 0.3;
-  transition: 0.5s;
-}
-
-.favorite__right-button::before, .favorite__left-button::before {
-  content: "";
-  width: 24px;
-  height: 3px;
-  background-color: #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.favorite__right-button:hover, .favorite__left-button:hover {
-  opacity: 1;
-}
-
 .favorite__right-button {
   top: 58.5%;
   right: 80px;
   z-index: 10;
 }
 
-.favorite__right-button:after {
-  content: "";
-  height: 15px;
-  width: 15px;
-  position: absolute;
-  border-top: 3px solid #fff;
-  border-right: 3px solid #fff;
-  transform: rotate(45deg) translate(-70%, 0);
-  top: 50%;
-  right: 6px;
-}
-
 .favorite__left-button {
   z-index: 10;
   top: 58.5%;
   left: 80px;
-}
-
-.favorite__left-button:after {
-  content: "";
-  height: 15px;
-  width: 15px;
-  position: absolute;
-  border-top: 3px solid #fff;
-  border-right: 3px solid #fff;
-  transform: rotate(225deg) translate(0, 68%);
-  top: 50%;
-  left: 6px;
-}
-
-.favorite__left-button .hidden {
-  display: none;
 }
 
 .favorite__cart {
@@ -605,6 +602,7 @@ h4 {
 }
 
 .giftset__button {
+  cursor: pointer;
   background-color: #edf0f5;
   width: 88px;
   height: 100%;
@@ -644,4 +642,104 @@ h4 {
 
 .property__text p:first-child {
   font-weight: 300;
+}
+
+.combo {
+  position: relative;
+  padding: 88px 0 128px 0;
+}
+
+.combo__bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  width: 27.43%;
+  height: 100%;
+  background-color: #415167;
+}
+
+.combo__subtitle {
+  text-align: center;
+}
+
+.combo__title {
+  margin: 6px 0 0 0;
+  text-align: center;
+}
+
+.combo__carts {
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  position: relative;
+  margin: 64px 0 0 0;
+}
+
+.combo__cart-line {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  left: 128px;
+  gap: 30px;
+  width: fit-content;
+  position: relative;
+  --slow: 0.7s;
+  transition: var(--slow);
+  --positionX: 0px;
+  transform: translateX(var(--positionX));
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  touch-action: none;
+}
+
+.combo__cart {
+  background-color: #fff;
+  width: 360px;
+}
+
+.combo__cart-img {
+  object-fit: contain;
+}
+
+.combo__cart-content {
+  padding: 42px;
+}
+
+.combo__cart-price {
+  display: flex;
+  align-items: center;
+}
+
+.combo__old-price {
+  margin: 0 0 0 20px;
+  text-decoration: line-through;
+  font-family: "Nunito Sans";
+  font-weight: 300;
+  font-size: 14px;
+  color: #415167;
+}
+
+.combo__cart-title {
+  margin: 9px 0 0 0;
+}
+
+.combo__cart-text {
+  text-align: left;
+  margin: 10px 0 0 0;
+}
+
+.combo__cart-button-block {
+  margin: 32px 0 0 0;
+}
+
+.combo__button-right {
+  top: 45%;
+  right: 66px;
+}
+
+.combo__button-left {
+  top: 45%;
+  left: 66px;
 }

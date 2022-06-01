@@ -64,6 +64,7 @@ $light_gray: #edf0f5;
 body {
    font-family: "Nunito Sans";
    font-weight: bold;
+   background: #f2f2f2;
    // min-height: 100%;
 }
 
@@ -107,6 +108,59 @@ main {
          font-weight: 700;
          font-size: 16px;
          color: #415167;
+      }
+   }
+}
+
+.slider {
+   &__button-right,
+   &__button-left {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background-color: $accent_color;
+      border-radius: 50%;
+      opacity: 0.3;
+      transition: 0.5s;
+
+      &::before {
+         content: "";
+         width: 24px;
+         height: 3px;
+         background-color: #fff;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+      }
+      &:hover {
+         opacity: 1;
+      }
+   }
+   &__button-right {
+      &:after {
+         content: "";
+         height: 15px;
+         width: 15px;
+         position: absolute;
+         border-top: 3px solid #fff;
+         border-right: 3px solid #fff;
+         transform: rotate(45deg) translate(-70%, 0);
+         top: 50%;
+         right: 6px;
+      }
+   }
+   &__button-left {
+      &:after {
+         content: "";
+         height: 15px;
+         width: 15px;
+         position: absolute;
+         border-top: 3px solid #fff;
+         border-right: 3px solid #fff;
+         transform: rotate(225deg) translate(0, 68%);
+         top: 50%;
+         left: 6px;
       }
    }
 }
@@ -346,67 +400,16 @@ h4 {
       margin: 72px 0 0 0;
    }
 
-   &__right-button,
-   &__left-button {
-      position: absolute;
-      width: 48px;
-      height: 48px;
-      background-color: $accent_color;
-      border-radius: 50%;
-      opacity: 0.3;
-      transition: 0.5s;
-
-      &::before {
-         content: "";
-         width: 24px;
-         height: 3px;
-         background-color: #fff;
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-      }
-      &:hover {
-         opacity: 1;
-      }
-   }
-
    &__right-button {
       top: 58.5%;
       right: 80px;
       z-index: 10;
-      &:after {
-         content: "";
-         height: 15px;
-         width: 15px;
-         position: absolute;
-         border-top: 3px solid #fff;
-         border-right: 3px solid #fff;
-         transform: rotate(45deg) translate(-70%, 0);
-         top: 50%;
-         right: 6px;
-      }
    }
    &__left-button {
       // position: absolute;
       z-index: 10;
       top: 58.5%;
       left: 80px;
-      &:after {
-         content: "";
-         height: 15px;
-         width: 15px;
-         position: absolute;
-         border-top: 3px solid #fff;
-         border-right: 3px solid #fff;
-         transform: rotate(225deg) translate(0, 68%);
-         top: 50%;
-         left: 6px;
-      }
-
-      .hidden {
-         display: none;
-      }
    }
 
    &__cart {
@@ -568,6 +571,7 @@ h4 {
    }
 
    &__button {
+      cursor: pointer;
       background-color: #edf0f5;
       width: 88px;
       height: 100%;
@@ -607,6 +611,110 @@ h4 {
       & p:first-child {
          font-weight: 300;
       }
+   }
+}
+
+///////////////////////////////////////////////
+
+.combo {
+   position: relative;
+   padding: 88px 0 128px 0;
+
+   &__bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 0;
+      width: 27.43%;
+      height: 100%;
+      background-color: $primary_color;
+   }
+
+   &__subtitle {
+      text-align: center;
+   }
+
+   &__title {
+      margin: 6px 0 0 0;
+      text-align: center;
+   }
+
+   &__carts {
+      width: 100%;
+      height: 600px;
+      overflow: hidden;
+      position: relative;
+      margin: 64px 0 0 0;
+   }
+
+   &__cart-line {
+      display: flex;
+      position: absolute;
+      top: 10px;
+      left: 128px;
+      gap: 30px;
+
+      width: fit-content;
+      position: relative;
+      // z-index: 2;
+      --slow: 0.7s;
+      transition: var(--slow);
+      --positionX: 0px;
+      transform: translateX(var(--positionX));
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      touch-action: none;
+   }
+
+   &__cart {
+      background-color: #fff;
+
+      width: 360px;
+      // height: 562px;
+   }
+
+   &__cart-img {
+      object-fit: contain;
+   }
+   &__cart-content {
+      padding: 42px;
+   }
+   &__cart-price {
+      display: flex;
+      align-items: center;
+   }
+
+   &__old-price {
+      margin: 0 0 0 20px;
+      text-decoration: line-through;
+      font-family: "Nunito Sans";
+      font-weight: 300;
+      font-size: 14px;
+      color: #415167;
+   }
+
+   &__cart-title {
+      margin: 9px 0 0 0;
+   }
+
+   &__cart-text {
+      text-align: left;
+      margin: 10px 0 0 0;
+   }
+
+   &__cart-button-block {
+      margin: 32px 0 0 0;
+   }
+
+   &__button-right {
+      top: 45%;
+      right: 66px;
+   }
+
+   &__button-left {
+      top: 45%;
+      left: 66px;
    }
 }
 
