@@ -1,29 +1,53 @@
-// Slider
-const favoriteLine = document.querySelector(".favorite__slider-line");
-const favoriteCards = document.getElementsByClassName("favorite__cart");
-const favoriteRightButton = document.querySelector(".favorite__right-button");
-const favoriteLeftButton = document.querySelector(".favorite__left-button");
+//////////////// Slider
 
-let favoritePage = 0;
-let favoriteMaxPage = favoriteCards.length / 2 - 1;
-let favoritePagelenght = document.querySelector(".favorite__cart").clientWidth + parseInt(getComputedStyle(favoriteLine).columnGap);
-let cursorPositionStart;
-let favoriteMoveble = false;
-let favorineLinePosition = 0;
-
-favoriteLine.ondragstart = function () {
-   return false;
-};
-favoriteLine.onpointermove = function () {
-   return false;
+let favorite = {
+   slider: document.querySelector(".favorite__slider-line"),
+   cartsArray: document.getElementsByClassName("favorite__cart"),
+   rightButton: document.querySelector(".favorite__right-button"),
+   leftButton: document.querySelector(".favorite__left-button"),
+   page: 0,
+   maxPage: (document.getElementsByClassName("favorite__cart").length / 2 - 1),
+   pageLeight: (document.querySelector(".favorite__cart").clientWidth + parseInt(getComputedStyle(document.querySelector(".favorite__slider-line")).columnGap)),
+   cursorStart: 0,
+   move: false,
+   sliderPosition: 0,
 };
 
-let moveSliderLine = function (slider, page, cartLenght) {
-   const style = window.getComputedStyle(slider);
+let combo = {
+   slider: document.querySelector('.combo__cart-line'),
+   cartsArray: document.getElementsByClassName('combo__cart'),
+   rightButton: document.querySelector('.combo__button-right'),
+   leftButton: document.querySelector('.combo__button-left'),
+   page: 0,
+   maxPage: (document.getElementsByClassName('combo__cart').length - 1),
+   pageLeight: ((document.getElementsByClassName('combo__cart'))[0].clientWidth + parseInt(getComputedStyle(document.querySelector('.combo__cart-line')).gap)),
+   cursorStart: 0,
+   move: false,
+   sliderPosition: 0,
+};
+
+//slider ondrag deactivate
+
+favorite.slider.ondragstart = function () {
+   return false;
+};
+favorite.slider.onpointermove = function () {
+   return false;
+};
+combo.slider.ondragstart = function () {
+   return false;
+};
+combo.slider.onpointermove = function () {
+   return false;
+};
+
+
+let moveSliderLine = function (obj, page, cartLenght) {
+   const style = window.getComputedStyle(obj.slider);
    const posX = parseInt(style.getPropertyValue("--positionX"));
    let moveX = -page * cartLenght;
-   favorineLinePosition = moveX;
-   slider.style.setProperty("--positionX", `${moveX}px`);
+   obj.slider.style.setProperty("--positionX", `${moveX}px`);
+   obj.sliderPosition = moveX;
 }
 
 let checkButtons = function (leftButton, rightButton, page, maxPage) {
@@ -41,73 +65,112 @@ let checkButtons = function (leftButton, rightButton, page, maxPage) {
    }
 }
 
-checkButtons(favoriteLeftButton, favoriteRightButton, favoritePage, favoriteMaxPage);
+checkButtons(favorite.leftButton, favorite.rightButton, favorite.page, favorite.maxPage);
+checkButtons(combo.leftButton, combo.rightButton, combo.page, combo.maxPage);
 
-favoriteRightButton.addEventListener('click', (event) => {
-   if (favoritePage < favoriteMaxPage) {
-      favoritePage++;
-      moveSliderLine(favoriteLine, favoritePage, favoritePagelenght);
+
+// slider buttons click event
+
+favorite.rightButton.addEventListener('click', (event) => {
+   if (favorite.page < favorite.maxPage) {
+      favorite.page++;
+      moveSliderLine(favorite, favorite.page, favorite.pageLeight);
+      checkButtons(favorite.leftButton, favorite.rightButton, favorite.page, favorite.maxPage);
    };
-   checkButtons(favoriteLeftButton, favoriteRightButton, favoritePage, favoriteMaxPage);
 })
 
-favoriteLeftButton.addEventListener('click', () => {
-   if (favoritePage > 0) {
-      favoritePage--;
-      moveSliderLine(favoriteLine, favoritePage, favoritePagelenght);
-      favoriteRightButton.classList.remove("hidden")
+favorite.leftButton.addEventListener('click', () => {
+   if (favorite.page > 0) {
+      favorite.page--;
+      moveSliderLine(favorite, favorite.page, favorite.pageLeight);
+      favorite.rightButton.classList.remove("hidden");
+      checkButtons(favorite.leftButton, favorite.rightButton, favorite.page, favorite.maxPage);
    }
-   checkButtons(favoriteLeftButton, favoriteRightButton, favoritePage, favoriteMaxPage);
-
 })
-favoriteLine.addEventListener("pointerdown", (event) => {
-   favoriteMoveble = true;
-   const style = window.getComputedStyle(favoriteLine);
+
+combo.rightButton.addEventListener('click', () => {
+   if (combo.page < combo.maxPage) {
+      combo.page++;
+      moveSliderLine(combo, combo.page, combo.pageLeight);
+   }
+   checkButtons(combo.leftButton, combo.rightButton, combo.page, combo.maxPage);
+})
+
+combo.leftButton.addEventListener('click', () => {
+   if (combo.page > 0) {
+      combo.page--;
+      moveSliderLine(combo, combo.page, combo.pageLeight);
+   }
+   checkButtons(combo.leftButton, combo.rightButton, combo.page, combo.maxPage);
+})
+
+
+// slider drag event
+
+let buttonDown = function (event, obj) {
+   obj.move = true;
+   const style = window.getComputedStyle(obj.slider);
    const posX = parseInt(style.getPropertyValue("--positionX"));
-   cursorPositionStart = event.pageX - posX;
-   favoriteLine.style.setProperty("--slow", "0s");
-})
+   obj.cursorStart = event.pageX - posX;
+   obj.slider.style.setProperty("--slow", "0s");
+}
 
-document.addEventListener("pointerup", (event) => {
-   // console.log(event.target);
-   favoriteMoveble = false;
-   if ((event.target !== favoriteRightButton) & (event.target !== favoriteLeftButton)) {
-      favoriteLine.style.setProperty("--slow", "0.7s");
-      favoritePage = Math.round(-favorineLinePosition / favoritePagelenght);
-      moveSliderLine(favoriteLine, favoritePage, favoritePagelenght)
+let buttonUp = function (event, obj) {
+   obj.move = false;
+   if ((event.target !== obj.rightButton) & (event.target !== obj.leftButton)) {
+      obj.slider.style.setProperty("--slow", "0.7s");
+      obj.page = Math.round(-obj.sliderPosition / obj.pageLeight);
+      moveSliderLine(obj, obj.page, obj.pageLeight);
+      checkButtons(obj.leftButton, obj.rightButton, obj.page, obj.maxPage);
    }
-   checkButtons(favoriteLeftButton, favoriteRightButton, favoritePage, favoriteMaxPage);
+}
 
-})
-
-favoriteLine.addEventListener("pointermove", (event) => {
-   if (!favoriteMoveble) {
+let buttonMove = function (event, obj) {
+   if (!obj.move) {
       return;
    }
-   favorineLinePosition = event.pageX - cursorPositionStart;
-   if (favorineLinePosition > 100) {
-      favoriteLine.style.setProperty("--slow", "0.7s");
-      favoriteLine.style.setProperty("--positionX", `0px`)
-      favorineLinePosition = 0;
-      favoriteMoveble = false;
+   obj.sliderPosition = event.pageX - obj.cursorStart;
+   if (obj.sliderPosition > 100) {
+      obj.slider.style.setProperty("--slow", "0.7s");
+      obj.slider.style.setProperty("--positionX", `0px`)
+      obj.sliderPosition = 0;
+      obj.move = false;
       return;
    }
-   else if (favorineLinePosition < -favoriteMaxPage * favoritePagelenght - 100) {
-      favoriteLine.style.setProperty("--slow", "0.7s");
-      favoriteLine.style.setProperty("--positionX", `${- favoriteMaxPage * favoritePagelenght}px`)
-      favorineLinePosition = -favoriteMaxPage * favoritePagelenght;
-      favoriteMoveble = false;
+   else if (obj.sliderPosition < -obj.maxPage * obj.pageLeight - 100) {
+      obj.slider.style.setProperty("--slow", "0.7s");
+      obj.slider.style.setProperty("--positionX", `${- obj.maxPage * obj.pageLeight}px`)
+      obj.sliderPosition = -obj.maxPage * obj.pageLeight;
+      obj.move = false;
       return;
    }
    else {
-      favoriteLine.style.setProperty("--positionX", `${favorineLinePosition}px`)
+      obj.slider.style.setProperty("--positionX", `${obj.sliderPosition}px`)
    }
+}
+
+
+favorite.slider.addEventListener("pointerdown", (event) => {
+   buttonDown(event, favorite);
+})
+combo.slider.addEventListener("pointerdown", (event) => {
+   buttonDown(event, combo);
+})
+
+document.addEventListener("pointerup", (event) => {
+   buttonUp(event, favorite);
+   buttonUp(event, combo);
+})
+
+favorite.slider.addEventListener("pointermove", (event) => {
+   buttonMove(event, favorite);
+})
+combo.slider.addEventListener("pointermove", (event) => {
+   buttonMove(event, combo);
 })
 
 
-
-
-//Buttons
+//////////////////////Buttons
 
 const giftsetButtons = document.querySelectorAll(".giftset__button");
 const giftsetCarts = document.querySelectorAll(".giftset__cart");
@@ -126,37 +189,4 @@ let giftsetCartChange = function (number) {
 giftsetButtons.forEach((item, index) => {
    item.addEventListener("click", () =>
       giftsetCartChange(index))
-
-})
-
-//slider combo
-
-const comboLine = document.querySelector('.combo__cart-line');
-const comboCarts = document.getElementsByClassName('combo__cart');
-const comboRightButton = document.querySelector('.combo__button-right');
-const comboLeftButton = document.querySelector('.combo__button-left');
-
-let comboPage = 0;
-let comboMaxPage = comboCarts.length - 1;
-let comboPageLenght = comboCarts[0].clientWidth + parseInt(getComputedStyle(comboLine).gap);
-
-
-checkButtons(comboLeftButton, comboRightButton, comboPage, comboMaxPage);
-
-// console.log(comboPageLenght);
-
-comboRightButton.addEventListener('click', () => {
-   if (comboPage < comboMaxPage) {
-      comboPage++;
-      moveSliderLine(comboLine, comboPage, comboPageLenght);
-   }
-   checkButtons(comboLeftButton, comboRightButton, comboPage, comboMaxPage);
-})
-
-comboLeftButton.addEventListener('click', () => {
-   if (comboPage > 0) {
-      comboPage--;
-      moveSliderLine(comboLine, comboPage, comboPageLenght);
-   }
-   checkButtons(comboLeftButton, comboRightButton, comboPage, comboMaxPage);
 })
