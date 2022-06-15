@@ -558,6 +558,7 @@ h4 {
 .giftset__cart {
   display: flex;
   position: absolute;
+  max-height: 100%;
   z-index: -1;
   transition: opacity 1s;
   opacity: 0;
@@ -570,6 +571,7 @@ h4 {
 
 .giftset__cart-content {
   padding: 64px;
+  max-height: 100%;
 }
 
 .giftset__cart-title {
@@ -577,8 +579,18 @@ h4 {
 }
 
 .giftset__cart-text {
+  position: relative;
   margin: 12px 0 0 0;
   text-align: left;
+}
+
+.giftset__cart-fulltext {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  visibility: hidden;
 }
 
 .giftset__cart-property {
@@ -742,4 +754,12 @@ h4 {
 .combo__button-left {
   top: 45%;
   left: 66px;
+}
+
+.temp {
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

@@ -174,6 +174,51 @@ combo.slider.addEventListener("pointermove", (event) => {
 
 const giftsetButtons = document.querySelectorAll(".giftset__button");
 const giftsetCarts = document.querySelectorAll(".giftset__cart");
+const giftsetCartText = document.querySelectorAll('.giftset__cart-text');
+const giftsetCartFullText = document.querySelectorAll('.giftset__cart-fulltext');
+
+
+let symbolOnString = 0;
+
+countSymbolOnString(0);
+
+function countSymbolOnString(cart) {
+   const text = giftsetCartFullText[cart].textContent;
+   let tempDiv = document.createElement('div');
+   tempDiv.classList.add('temp');
+   document.body.append(tempDiv);
+   let symbolLength = 0;
+   let countLength = 0;
+   symbolOnString = 0
+   for (let symbolText of text) {
+      let tempDomDiv = document.querySelector('.temp')
+      tempDiv.innerHTML = symbolText;
+      symbolLength = tempDiv.clientWidth;
+      if (symbolLength === 0) {
+         symbolLength = 7
+      }
+      else {
+         symbolLength = tempDiv.clientWidth;
+      }
+      countLength = countLength + symbolLength + 2;
+      symbolOnString++;
+
+      if (countLength > giftsetCartFullText[cart].clientWidth) {
+         break;
+      }
+   }
+   tempDiv.remove();
+   shortTextAdd(cart)
+   // console.log(symbolOnString);
+}
+
+function shortTextAdd(index) {
+   let shortTextLength = symbolOnString * 5;
+   let shortText = giftsetCartFullText[index].textContent.slice(0, shortTextLength);
+   console.log(symbolOnString);
+   giftsetCartText[index].innerHTML = `${shortText}...`;
+   giftsetCartText[index].append(giftsetCartFullText[index]);
+}
 
 let giftsetCartChange = function (number) {
    giftsetButtons.forEach((element) => {
@@ -184,9 +229,14 @@ let giftsetCartChange = function (number) {
       element.classList.remove("active")
    });
    giftsetCarts[number].classList.add("active")
+
+
 };
 
 giftsetButtons.forEach((item, index) => {
-   item.addEventListener("click", () =>
-      giftsetCartChange(index))
+   item.addEventListener("click", () => {
+      giftsetCartChange(index);
+      countSymbolOnString(index);
+   })
+
 })
