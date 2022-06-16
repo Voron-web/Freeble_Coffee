@@ -531,7 +531,17 @@ h4 {
          z-index: 0;
       }
    }
+   &__more-btn {
+      display: none;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 4px;
 
+      &.active {
+         display: inline;
+      }
+   }
    &__cart-content {
       padding: 64px;
       max-height: 100%;
@@ -551,11 +561,20 @@ h4 {
    }
    &__cart-fulltext {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: -12px;
+      left: -7px;
       width: 100%;
       background-color: #fff;
-      visibility: hidden;
+      // visibility: hidden;
+      opacity: 0;
+      transition: 0.8s;
+      z-index: -1;
+      &.show {
+         // visibility: visible;
+         opacity: 1;
+         z-index: 2;
+         box-shadow: 0px 0px 10px 3px #ccc;
+      }
    }
 
    &__cart-property {

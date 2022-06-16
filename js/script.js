@@ -176,11 +176,19 @@ const giftsetButtons = document.querySelectorAll(".giftset__button");
 const giftsetCarts = document.querySelectorAll(".giftset__cart");
 const giftsetCartText = document.querySelectorAll('.giftset__cart-text');
 const giftsetCartFullText = document.querySelectorAll('.giftset__cart-fulltext');
+const giftsetMoreBtn = document.querySelectorAll('.giftset__more-btn');
 
 
 let symbolOnString = 0;
 
 countSymbolOnString(0);
+window.addEventListener('resize', () => {
+   // console.log('resize');
+   for (let i = 0; i < giftsetCartText.length; i++) {
+      countSymbolOnString(i);
+      // console.log(i);
+   }
+})
 
 function countSymbolOnString(cart) {
    const text = giftsetCartFullText[cart].textContent;
@@ -214,10 +222,35 @@ function countSymbolOnString(cart) {
 
 function shortTextAdd(index) {
    let shortTextLength = symbolOnString * 5;
-   let shortText = giftsetCartFullText[index].textContent.slice(0, shortTextLength);
-   console.log(symbolOnString);
-   giftsetCartText[index].innerHTML = `${shortText}...`;
+   let shortText;
+   // console.log(giftsetCartFullText[index].textContent.length);
+   if (shortTextLength < giftsetCartFullText[index].textContent.length) {
+      shortText = giftsetCartFullText[index].textContent.slice(0, shortTextLength);
+      giftsetCartText[index].innerHTML = `${shortText} `;
+      giftsetMoreBtn[index].classList.add('active');
+      giftsetMoreBtn[index].addEventListener('click', () => giftsetShowFullText(index));
+      giftsetCartText[index].append(giftsetMoreBtn[index]);
+
+   }
+   else {
+      giftsetCartText[index].innerHTML = `${giftsetCartFullText[index].textConten} `;
+   }
+   // console.log(symbolOnString);
+   // if (shortTextLength < )
    giftsetCartText[index].append(giftsetCartFullText[index]);
+}
+function giftsetShowFullText(index) {
+   giftsetCartFullText[index].classList.add('show');
+   document.addEventListener('mousedown', globalClick
+   )
+}
+
+function globalClick() {
+   giftsetCartFullText.forEach((element) => {
+      element.classList.remove('show');
+   })
+   document.removeEventListener('mousedown', globalClick
+   );
 }
 
 let giftsetCartChange = function (number) {
