@@ -81,9 +81,6 @@ main {
       color: #c7a17a;
    }
 
-   &__title {
-   }
-
    &__text {
       font-weight: 300;
       font-size: 16px;
@@ -209,7 +206,7 @@ h4 {
 }
 
 .header {
-   width: 100%;
+   max-width: 100%;
    min-height: 768px;
    display: flex;
    position: relative;
@@ -223,29 +220,41 @@ h4 {
    &__bg {
       flex: 0 0 49.28%;
       // justify-self: stretch;
+      // width: 100%;
+      height: 100%;
       overflow: hidden;
+
       & img {
+         object-fit: cover;
+         object-position: left top;
+         min-width: 100%;
          // width: 100%;
-         height: auto;
-         object-fit: contain;
+         // min-height: 100%;
+         height: 100%;
       }
    }
 
    &__menu {
       position: relative;
       margin: 0;
-      padding: 0;
+      padding: 72px 0 0 45px;
       // position: relative;
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
+      // justify-content: center;
       // padding: 0 0 0 60px;
       // height: 100%;
       flex: 0 1 23.15%;
       // flex: 0 0 auto;
       width: 100%;
       background-color: $primary_color;
-      & ul {
-         margin: 60px;
+      &__menu-list {
+         // align-self: center;
+         padding: 0 10px 0 0;
+         justify-self: center;
+         margin: auto 0;
+         // margin: 60px 0 0 0;
       }
       & li {
          margin: 30px 0 0 0;
@@ -263,18 +272,15 @@ h4 {
       }
    }
    &__cart {
-      position: absolute;
-      top: 72px;
-      // left: 24px;
-      left: 60px;
+      position: relative;
       width: 24px;
       height: 24px;
    }
 
    &__title {
       position: absolute;
-      top: 504px;
       left: 9.28%;
+      bottom: 50px;
       display: flex;
       flex-direction: column;
       // font-family: "Montserrat";
@@ -290,6 +296,46 @@ h4 {
          color: $light_gray;
          background-color: $accent_color;
       }
+      & h1:first-child span,
+      & h1:last-child span {
+         background-color: #f2f2f2;
+      }
+   }
+   &__burger {
+      display: none;
+      position: relative;
+      width: 28px;
+      height: 22px;
+      transition: 5s;
+      & div {
+         position: absolute;
+         width: 100%;
+         height: 4px;
+         background-color: #fff;
+         left: 0;
+         &:nth-child(2) {
+            top: 50%;
+            transform: translate(0, -50%);
+         }
+         &:first-child {
+            bottom: 0;
+         }
+      }
+      &.active {
+         & div:first-child {
+            top: 50%;
+            transform: rotate(45deg) translate(0, -50%);
+         }
+         & div:nth-child(2) {
+            visibility: hidden;
+         }
+         & div:last-child {
+            bottom: 50%;
+            transform: rotate(-45deg) translate(0, 50%);
+         }
+      }
+   }
+   &__menu-list {
    }
 }
 .logo {
@@ -376,7 +422,6 @@ h4 {
    &__subtitle {
       text-align: center;
    }
-
    &__title {
       margin: 6px 0 0 0;
       text-align: center;
@@ -429,13 +474,12 @@ h4 {
       width: 100%;
       padding: 42px;
    }
-   &__cart-price {
-   }
    &__cart-title {
       margin: 8px 0 0 0;
    }
    &__cart-text {
       margin: 24px 0 0 0;
+      text-align: start;
    }
    &__cart-buttons {
       margin: 18px 0 0 0;
@@ -452,6 +496,7 @@ h4 {
       row-gap: 32px;
       column-gap: 30px;
       left: 130px;
+      top: 0;
       z-index: 2;
       --slow: 0.7s;
       transition: var(--slow);
@@ -508,8 +553,14 @@ h4 {
    }
 
    &__cart-img {
+      display: flex;
+      align-items: center;
       flex: 0 0 47%;
       object-fit: contain;
+      & img {
+         // width: 100%;
+         max-width: 100%;
+      }
    }
    &__carts {
       width: 100%;
@@ -531,23 +582,20 @@ h4 {
          z-index: 0;
       }
    }
-   &__more-btn {
-      display: none;
-      font-size: 20px;
-      font-weight: 700;
-      cursor: pointer;
-      letter-spacing: 4px;
+   // &__more-btn {
+   //    display: none;
+   //    font-size: 20px;
+   //    font-weight: 700;
+   //    cursor: pointer;
+   //    letter-spacing: 4px;
 
-      &.active {
-         display: inline;
-      }
-   }
+   //    &.active {
+   //       display: inline;
+   //    }
+   // }
    &__cart-content {
-      padding: 64px;
+      padding: 5%;
       max-height: 100%;
-   }
-
-   &__cart-price {
    }
 
    &__cart-title {
@@ -558,19 +606,29 @@ h4 {
       position: relative;
       margin: 12px 0 0 0;
       text-align: left;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      overflow: hidden;
    }
+
    &__cart-fulltext {
+      padding: 5px;
       position: absolute;
-      top: -12px;
-      left: -7px;
-      width: 100%;
+      // top: -17px;
+      // top: -5px;
+      top: -17px;
+      left: -5px;
+      // left: 0;
+      width: calc(100% + 7px);
       background-color: #fff;
+      text-align: start;
       // visibility: hidden;
       opacity: 0;
-      transition: 0.8s;
       z-index: -1;
       &.show {
          // visibility: visible;
+         transition: opacity 0.8s;
          opacity: 1;
          z-index: 2;
          box-shadow: 0px 0px 10px 3px #ccc;
@@ -585,7 +643,7 @@ h4 {
    &__cart-button-block {
       margin: 46px 0 0 0;
       & a {
-         margin: 0 62px;
+         margin: 0 auto;
       }
    }
 
@@ -681,10 +739,8 @@ h4 {
       top: 10px;
       left: 128px;
       gap: 30px;
-
       width: fit-content;
       position: relative;
-      // z-index: 2;
       --slow: 0.7s;
       transition: var(--slow);
       --positionX: 0px;
@@ -697,7 +753,6 @@ h4 {
 
    &__cart {
       background-color: #fff;
-
       width: 360px;
       // height: 562px;
    }
@@ -729,6 +784,11 @@ h4 {
    &__cart-text {
       text-align: left;
       margin: 10px 0 0 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      -webkit-box-flex: 1;
+      overflow: hidden;
    }
 
    &__cart-button-block {
@@ -766,8 +826,12 @@ footer {
    font-weight: 300;
    font-style: italic;
    color: #415167;
+   // overflow: hidden;
 }
 
-// * {
-//    // border: 1px solid red;
-// }
+* {
+   // border: 1px solid red;
+}
+
+// @media(max-width: )
+@import "media.scss";

@@ -1,3 +1,23 @@
+//////////////// Burger
+const burgerBtn = document.querySelector('.header__burger');
+const burgerMenu = document.querySelector('.header__menu-list');
+const burgerMenuLink = document.querySelectorAll('.header__menu-list>li');
+
+function changeMenuStatus() {
+   burgerBtn.classList.toggle('active');
+   burgerMenu.classList.toggle('active');
+}
+
+burgerBtn.addEventListener('click', () => {
+   changeMenuStatus();
+})
+
+burgerMenuLink.forEach((elem) => {
+   elem.addEventListener('click', changeMenuStatus)
+})
+
+
+
 //////////////// Slider
 
 let favorite = {
@@ -6,12 +26,21 @@ let favorite = {
    rightButton: document.querySelector(".favorite__right-button"),
    leftButton: document.querySelector(".favorite__left-button"),
    page: 0,
-   maxPage: (document.getElementsByClassName("favorite__cart").length / 2 - 1),
+   maxPage: 0,
+   // maxPage: (document.getElementsByClassName("favorite__cart").length / 2 - 1),
+   // maxPage: (document.getElementsByClassName("favorite__cart").length / (getComputedStyle(this.slider).gridTemplateRows.split(' ').length) - 1),
+   // sliderLeight: this.slider.getComputedStyle().gridTemplateRows,
    pageLeight: (document.querySelector(".favorite__cart").clientWidth + parseInt(getComputedStyle(document.querySelector(".favorite__slider-line")).columnGap)),
    cursorStart: 0,
    move: false,
    sliderPosition: 0,
 };
+
+window.addEventListener('resize', () => {
+   favorite.maxPage = (document.getElementsByClassName("favorite__cart").length / (getComputedStyle(favorite.slider).gridTemplateRows.split(' ').length) - 1)
+})
+// favorite.maxPage = (document.getElementsByClassName("favorite__cart").length / (getComputedStyle(favorite.slider).gridTemplateRows.split(' ').length) - 1)
+// console.log(getComputedStyle(favorite.slider).gridTemplateRows.split(' ').length);
 
 let combo = {
    slider: document.querySelector('.combo__cart-line'),
@@ -170,88 +199,135 @@ combo.slider.addEventListener("pointermove", (event) => {
 })
 
 
-//////////////////////Buttons
+//////////////////////Buttons slider
 
 const giftsetButtons = document.querySelectorAll(".giftset__button");
 const giftsetCarts = document.querySelectorAll(".giftset__cart");
 const giftsetCartText = document.querySelectorAll('.giftset__cart-text');
+const giftsetCartShortText = document.querySelectorAll('.giftset__short-text');
 const giftsetCartFullText = document.querySelectorAll('.giftset__cart-fulltext');
-const giftsetMoreBtn = document.querySelectorAll('.giftset__more-btn');
+// const giftsetMoreBtn = document.querySelectorAll('.giftset__more-btn');
 
+checkStringCount(0);
+// function addShowMoreBtn(index) {
+//    giftsetMoreBtn.forEach((elem) => {
+//       elem.classList.remove('active');
+//    });
+//    giftsetMoreBtn[index].classList.add('active');
+// }
 
-let symbolOnString = 0;
+// function addFullText(item, text) {
+// giftsetCartFullText[item].
+// }
+function addEventText(item) {
+   giftsetCartShortText[item].addEventListener('click', () => {
+      // console.log(item);
+      showFullText(item);
+      document.addEventListener('mousedown', globalClick)
 
-countSymbolOnString(0);
-window.addEventListener('resize', () => {
-   // console.log('resize');
-   for (let i = 0; i < giftsetCartText.length; i++) {
-      countSymbolOnString(i);
-      // console.log(i);
-   }
-})
-
-function countSymbolOnString(cart) {
-   const text = giftsetCartFullText[cart].textContent;
-   let tempDiv = document.createElement('div');
-   tempDiv.classList.add('temp');
-   document.body.append(tempDiv);
-   let symbolLength = 0;
-   let countLength = 0;
-   symbolOnString = 0
-   for (let symbolText of text) {
-      let tempDomDiv = document.querySelector('.temp')
-      tempDiv.innerHTML = symbolText;
-      symbolLength = tempDiv.clientWidth;
-      if (symbolLength === 0) {
-         symbolLength = 7
-      }
-      else {
-         symbolLength = tempDiv.clientWidth;
-      }
-      countLength = countLength + symbolLength + 2;
-      symbolOnString++;
-
-      if (countLength > giftsetCartFullText[cart].clientWidth) {
-         break;
-      }
-   }
-   tempDiv.remove();
-   shortTextAdd(cart)
-   // console.log(symbolOnString);
-}
-
-function shortTextAdd(index) {
-   let shortTextLength = symbolOnString * 5;
-   let shortText;
-   // console.log(giftsetCartFullText[index].textContent.length);
-   if (shortTextLength < giftsetCartFullText[index].textContent.length) {
-      shortText = giftsetCartFullText[index].textContent.slice(0, shortTextLength);
-      giftsetCartText[index].innerHTML = `${shortText} `;
-      giftsetMoreBtn[index].classList.add('active');
-      giftsetMoreBtn[index].addEventListener('click', () => giftsetShowFullText(index));
-      giftsetCartText[index].append(giftsetMoreBtn[index]);
-
-   }
-   else {
-      giftsetCartText[index].innerHTML = `${giftsetCartFullText[index].textConten} `;
-   }
-   // console.log(symbolOnString);
-   // if (shortTextLength < )
-   giftsetCartText[index].append(giftsetCartFullText[index]);
-}
-function giftsetShowFullText(index) {
-   giftsetCartFullText[index].classList.add('show');
-   document.addEventListener('mousedown', globalClick
-   )
-}
-
-function globalClick() {
-   giftsetCartFullText.forEach((element) => {
-      element.classList.remove('show');
    })
-   document.removeEventListener('mousedown', globalClick
-   );
+
+   function globalClick() {
+      giftsetCartFullText.forEach((element) => {
+         element.classList.remove('show');
+      })
+      giftsetCartText[item].style.overflow = 'hidden';
+      document.removeEventListener('mousedown', globalClick
+      );
+
+   }
+
 }
+function showFullText(item) {
+   giftsetCartFullText[item].classList.add('show');
+   giftsetCartText[item].style.overflow = 'visible';
+}
+function checkStringCount(item) {
+   if (giftsetCartShortText[item].getClientRects().length > getComputedStyle(giftsetCartText[item]).webkitLineClamp) {
+      addEventText(item)
+
+   };
+}
+// let a = giftsetCartShortText[0].getClientRects().length;
+// console.log(a);
+// let x = window.getComputedStyle(giftsetCartText[0]);
+// console.log(x.webkitLineClamp);
+
+
+
+// let symbolOnString = 0;
+
+// countSymbolOnString(0);
+// window.addEventListener('resize', () => {
+//    // console.log('resize');
+//    for (let i = 0; i < giftsetCartText.length; i++) {
+//       countSymbolOnString(i);
+//       // console.log(i);
+//    }
+// })
+
+// function countSymbolOnString(cart) {
+//    const text = giftsetCartFullText[cart].textContent;
+//    let tempDiv = document.createElement('div');
+//    tempDiv.classList.add('temp');
+//    document.body.append(tempDiv);
+//    let symbolLength = 0;
+//    let countLength = 0;
+//    symbolOnString = 0
+//    for (let symbolText of text) {
+//       let tempDomDiv = document.querySelector('.temp')
+//       tempDiv.innerHTML = symbolText;
+//       symbolLength = tempDiv.clientWidth;
+//       if (symbolLength === 0) {
+//          symbolLength = 7
+//       }
+//       else {
+//          symbolLength = tempDiv.clientWidth;
+//       }
+//       countLength = countLength + symbolLength + 2;
+//       symbolOnString++;
+
+
+//       if (countLength > giftsetCartFullText[cart].clientWidth) {
+//          break;
+//       }
+//    }
+//    tempDiv.remove();
+//    shortTextAdd(cart)
+// }
+
+// function shortTextAdd(index) {
+//    let shortTextLength = symbolOnString * 5;
+//    let shortText;
+//    // console.log(giftsetCartFullText[index].textContent.length);
+//    if (shortTextLength < giftsetCartFullText[index].textContent.length) {
+//       shortText = giftsetCartFullText[index].textContent.slice(0, shortTextLength);
+//       giftsetCartText[index].innerHTML = `${shortText} `;
+//       giftsetMoreBtn[index].classList.add('active');
+//       giftsetMoreBtn[index].addEventListener('click', () => giftsetShowFullText(index));
+//       giftsetCartText[index].append(giftsetMoreBtn[index]);
+
+//    }
+//    else {
+//       giftsetCartText[index].innerHTML = `${giftsetCartFullText[index].textConten} `;
+//    }
+//    // console.log(symbolOnString);
+//    // if (shortTextLength < )
+//    giftsetCartText[index].append(giftsetCartFullText[index]);
+// }
+// function giftsetShowFullText(index) {
+//    giftsetCartFullText[index].classList.add('show');
+//    document.addEventListener('mousedown', globalClick
+//    )
+// }
+
+// function globalClick() {
+//    giftsetCartFullText.forEach((element) => {
+//       element.classList.remove('show');
+//    })
+//    document.removeEventListener('mousedown', globalClick
+//    );
+// }
 
 let giftsetCartChange = function (number) {
    giftsetButtons.forEach((element) => {
@@ -269,7 +345,8 @@ let giftsetCartChange = function (number) {
 giftsetButtons.forEach((item, index) => {
    item.addEventListener("click", () => {
       giftsetCartChange(index);
-      countSymbolOnString(index);
+      checkStringCount(index);
    })
 
 })
+
