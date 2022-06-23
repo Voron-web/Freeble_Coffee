@@ -36,6 +36,7 @@ let favorite = {
    sliderPosition: 0,
 };
 
+favorite.maxPage = (document.getElementsByClassName("favorite__cart").length / (getComputedStyle(favorite.slider).gridTemplateRows.split(' ').length) - 1)
 window.addEventListener('resize', () => {
    favorite.maxPage = (document.getElementsByClassName("favorite__cart").length / (getComputedStyle(favorite.slider).gridTemplateRows.split(' ').length) - 1)
 })
